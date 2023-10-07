@@ -2,17 +2,16 @@ const exprees = require("express")
 const dotenv = require("dotenv")
 const mongoose = require("mongoose")
 const app =  exprees()
+const cors = require("cors")
 const PORT = process.env.PORT || 8000
 dotenv.config()
 
-const authRoute = require("./routes/auth.route")
+
 app.use(exprees.json())
+app.use(cors());
 
+const authRoute = require("./routes/auth.route")
 app.use("/api/",authRoute )
-
-app.get("/", (req, res)=>{
-    res.send("This Is Get Request")
-})
 
 const dbUrl = process.env.MONGOBD_URL
 
@@ -33,3 +32,12 @@ mongoose
 
 
 
+app.use((err,req, res, next)=>{
+  const statusCode = err.statusCode || 500
+  const message = err.message || "Internel Server Error"
+  return res.status(statusCode).json({
+    success : false,
+    message,
+    statusCode
+  })
+})
