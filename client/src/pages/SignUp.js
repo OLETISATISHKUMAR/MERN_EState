@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -10,7 +10,7 @@ function SignUp() {
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate()
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -35,7 +35,7 @@ function SignUp() {
 
       const data = await response.json();
       console.log(data);
-
+      navigate("/")
       if (!response.ok) {
         setError(data.message);
       } else if (data.success === false) {
