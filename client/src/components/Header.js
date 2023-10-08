@@ -1,37 +1,44 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FaSearch } from "react-icons/fa"; // Assuming you have imported the FontAwesome search icon
+import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-function Header() {
+export default function Header() {
   return (
-    <header className="bg-blue-500 p-2.5">
-      <div className="container mx-auto flex justify-between items-center ml-10">
-        <h1 className="text-3xl font-bold text-white">
-          <span className="text-yellow-400">Satish</span>
-          <span>Kumar</span>
-        </h1>
-        <form className="bg-white rounded-md p-1  flex items-center">
+    <header className='bg-white border-gray-200 dark:bg-gray-900'>
+      <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
+        <Link to='/'>
+          <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
+            <span className='text-slate-500'>Satish</span>
+            <span className='text-white'>Kumar</span>
+          </h1>
+        </Link>
+        <form className='bg-slate-100 p-2 rounded-lg flex items-center'>
           <input
-            className="bg-white pl-1 focus:outline-none w-56"
-            type="text"
-            placeholder="Search...."
+            type='text'
+            placeholder='Search...'
+            className='bg-transparent focus:outline-none w-24 sm:w-64'
           />
-           <FaSearch className="text-gray-400 mr-2" />
+          <button>
+            <FaSearch className='text-slate-600' />
+          </button>
         </form>
-        <nav className="space-x-5 mr-20">
-          <Link to="/" className="text-white hover:text-yellow-400">
-            Home
+        <ul className='flex gap-4'>
+          <Link to='/' className='no-underline'>
+            <li className='hidden sm:inline text-white hover:underline-none  hover:text-blue-400 '>
+              Home
+            </li>
           </Link>
-          <Link to="/about" className="text-white hover:text-yellow-400">
-            About
+          <Link to='/about' className='no-underline'>
+            <li className='hidden sm:inline text-white hover:underline-none hover:text-blue-400'>
+              About
+            </li>
           </Link>
-          <Link to="/login" className="text-white hover:text-yellow-400">
-            SignIn
+          <Link to='/signup' className='no-underline'>
+            <li className='hidden sm:inline text-white hover:underline-none hover:text-blue-400'>
+              Sign Up
+            </li>
           </Link>
-        </nav>
+        </ul>
       </div>
     </header>
   );
 }
-
-export default Header;
